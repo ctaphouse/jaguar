@@ -7,7 +7,7 @@ public class ClassConfiguration : IEntityTypeConfiguration<Class>
 {
     public void Configure(EntityTypeBuilder<Class> builder)
     {
-        builder.Property(x => x.Name).IsRequired();
-        builder.Property(x => x.Description).IsRequired();
+       builder.Property(x => x.Name).IsRequired();
+       builder.Property(x => x.Description).IsRequired();
     }
 }
