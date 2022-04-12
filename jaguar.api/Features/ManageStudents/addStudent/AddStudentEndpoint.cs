@@ -19,7 +19,7 @@ public class AddStudentEndpoint : EndpointBaseAsync.WithRequest<Student>.WithAct
            FirstName = request.FirstName,
            LastName = request.LastName,
            City = request.City,
-           State = request.State
+           State = request.State  
        };
 
        await _context.Students.AddAsync(student, cancellationToken);
@@ -27,7 +27,7 @@ public class AddStudentEndpoint : EndpointBaseAsync.WithRequest<Student>.WithAct
        var classes = request.Classes.Select(x => new Class
        {
            Name = x.Name,
-           Description = x.Description
+           Description = x.Description,           
        });
 
        await _context.AddRangeAsync(classes, cancellationToken);
