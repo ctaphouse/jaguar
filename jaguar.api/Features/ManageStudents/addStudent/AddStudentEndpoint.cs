@@ -15,25 +15,33 @@ public class AddStudentEndpoint : EndpointBaseAsync.WithRequest<Student>.WithAct
     [HttpPost("/api/students")]
     public override async Task<ActionResult<int>> HandleAsync(Student request, CancellationToken cancellationToken = default)
     {
-       var student = new Student {
-           FirstName = request.FirstName,
-           LastName = request.LastName,
-           City = request.City,
-           State = request.State  
-       };
+        var student = new Student
+        {
+            FirstName = request.FirstName,
+            LastName = request.LastName,
+            City = request.City,
+            State = request.State
+        };
 
-       await _context.Students.AddAsync(student, cancellationToken);
+        await _context.Students.AddAsync(student, cancellationToken);
 
-       var classes = request.Classes.Select(x => new Class
-       {
-           Name = x.Name,
-           Description = x.Description,           
-       });
+        var classes = request.Classes.Select(x =>
+            new Class
+            {
+                Name = x.Name,
+                Description = x.Description,
+            }
+        );
 
-       await _context.AddRangeAsync(classes, cancellationToken);
+        foreach(var c in classes)
+        {
+            student.Classes.Add(c);
+        }
 
-       await _context.SaveChangesAsync(cancellationToken);
+        await _context.AddRangeAsync(classes, cancellationToken);
 
-       return Ok(student.Id);
+        await _context.SaveChangesAsync(cancellationToken);
+
+        return Ok(student.Id);
     }
 }

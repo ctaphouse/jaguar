@@ -8,5 +8,5 @@ public class Student
     public string City { get; set; } = default!;
     public string State { get; set; } = default!;
 
-    public IEnumerable<Class> Classes { get; set; } = new List<Class>();
+    public ICollection<Class> Classes { get; set; } = new List<Class>();
 }

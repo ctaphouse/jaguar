@@ -6,7 +6,7 @@ public class JaguarContext : DbContext
 {
     public JaguarContext(DbContextOptions<JaguarContext> options) : base(options)
     {
-        
+
     }
 
     public DbSet<Student> Students { get; set; } = default!;
